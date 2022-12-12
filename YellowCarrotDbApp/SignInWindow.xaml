@@ -9,9 +9,138 @@
         Height="600"
         Width="1200"
         Background="#333D79FF"
-        Foreground="#FAEBEFFF"
+        FontFamily="Merriweather"
+        FontSize="20"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <!-- Grid definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Column="2"
+            Grid.Row="1"
+            Content="- the Yellow Carrot -"
+            FontFamily="Milkshake"
+            Foreground="#FAEBEFFF"
+            FontSize="60"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Grid.ColumnSpan="3"/>
+        <Label
+            Grid.Column="2"
+            Grid.Row="2"
+            Content="User name:"
+            Foreground="#FAEBEFFF"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <TextBox
+            Name="txtUserName"
+            Grid.Column="3"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Width="310"
+            Height="40"
+            Background="#333D79FF" 
+            Foreground="#FAEBEFFF"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            BorderBrush="#FAEBEFFF"
+            BorderThickness="2">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Label
+            Grid.Column="2"
+            Grid.Row="3"
+            Content="Password:"
+            Foreground="#FAEBEFFF"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <Border CornerRadius="5"
+                Grid.Row="3"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                Width="310"
+                Height="40"
+                HorizontalAlignment="Left"
+                BorderBrush="#FAEBEFFF"
+                BorderThickness="2">
+            <PasswordBox
+            Name="pbPassword"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            Height="40"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            BorderThickness="0"/>
+        </Border>
+        <Button
+            Name="btnSignIn"
+            Grid.Column="3"
+            Grid.Row="4"
+            Width="100"
+            Height="40"
+            Content="Sign in"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            Margin="10"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label
+            Grid.Column="3"
+            Grid.Row="5"
+            Content="- or -"
+            Foreground="#FAEBEFFF"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"/>
+        <Button
+            Name="btnToRegisterWindow"
+            Grid.Column="0"
+            Grid.Row="7"
+            Grid.ColumnSpan="2"
+            Width="150"
+            Content="Register"
+            FontSize="18"
+            Background="CornflowerBlue"
+            Foreground="AliceBlue"
+            Margin="10"
+            BorderThickness="0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
     </Grid>
 </Window>
+    
