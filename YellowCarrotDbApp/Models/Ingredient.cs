@@ -6,6 +6,6 @@
         public string Name { get; set; } = null!;
         public string Quantity { get; set; } = null!;
         public int RecipeId { get; set; }
-        public Recipe Recipe { get; set; } = new();
+        public Recipe? Recipe { get; set; }
     }
 }

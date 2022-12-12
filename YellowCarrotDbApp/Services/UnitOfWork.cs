@@ -6,6 +6,7 @@ namespace YellowCarrotDbApp.Services
     {
         private readonly AppDbContext _context;
         private readonly UserDbContext _userContext;
+
         private IngredientRepository _ingredientRepository;
         private RecipeRepository _recipeRepository;
         private TagRepository _tagRepository;
@@ -65,7 +66,7 @@ namespace YellowCarrotDbApp.Services
         {
             get
             {
-                // TODO: Possibly add further conditionals 
+                // TODO: Possibly change/add conditionals 
                 if (_userRepository == null && _userContext != null)
                 {
                     _userRepository = new(_userContext);

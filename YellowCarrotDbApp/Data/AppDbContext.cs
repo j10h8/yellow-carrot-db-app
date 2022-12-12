@@ -18,6 +18,7 @@ namespace YellowCarrotDbApp.Data
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,6 +27,11 @@ namespace YellowCarrotDbApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AppUser>().HasData(new AppUser()
+            {
+                Username = "user"
+            });
+
             // TODO: implement delete behaviour if found necessary 
         }
     }
