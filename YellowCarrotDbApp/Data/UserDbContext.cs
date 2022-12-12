@@ -21,5 +21,10 @@ namespace YellowCarrotDbApp.Data
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=YellowCarrotUsersDb;Trusted_Connection=True;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // TODO: implement delete behaviour if found necessary 
+        }
     }
 }
