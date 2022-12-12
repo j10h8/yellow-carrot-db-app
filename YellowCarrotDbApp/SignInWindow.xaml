@@ -9,7 +9,7 @@
         Height="600"
         Width="1200"
         Background="#333D79FF"
-        FontFamily="Merriweather"
+        FontFamily="Calibri"
         FontSize="20"
         WindowStartupLocation="CenterScreen">
     <Grid>
@@ -25,19 +25,19 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Label
             Grid.Column="2"
             Grid.Row="1"
             Content="- the Yellow Carrot -"
-            FontFamily="Milkshake"
+            FontFamily="Arial"
             Foreground="#FAEBEFFF"
             FontSize="60"
             HorizontalContentAlignment="Center"
@@ -104,6 +104,7 @@
             Width="100"
             Height="40"
             Content="Sign in"
+            FontSize="18"
             Background="#333D79FF"
             Foreground="#FAEBEFFF"
             Margin="10"
@@ -122,6 +123,44 @@
             Foreground="#FAEBEFFF"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"/>
+        <Button
+            Name="btnRegister"
+            Grid.Column="3"
+            Grid.Row="6"
+            Width="100"
+            Height="40"
+            Content="Register"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            Margin="10"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnCloseApp"
+            Grid.Column="5"
+            Grid.Row="1"
+            Width="100"
+            Height="40"
+            Content="Close app"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            Margin="10"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <Button
             Name="btnToRegisterWindow"
             Grid.Column="0"
