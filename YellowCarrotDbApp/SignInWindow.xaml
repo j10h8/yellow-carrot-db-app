@@ -11,7 +11,11 @@
         Background="#333D79FF"
         FontFamily="Calibri"
         FontSize="20"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        MaxHeight="600"
+        MinHeight="600"
+        MaxWidth="1200"
+        MinWidth="1200">
     <Grid>
         <!-- Grid definitions -->
         <Grid.ColumnDefinitions>
@@ -64,7 +68,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="#FAEBEFFF"
-            BorderThickness="2">
+            BorderThickness="2"
+            MaxLength="24">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -95,7 +100,8 @@
             VerticalAlignment="Center"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
-            BorderThickness="0"/>
+            BorderThickness="0"
+            MaxLength="24"/>
         </Border>
         <Button
             Name="btnSignIn"
@@ -109,7 +115,8 @@
             Foreground="#FAEBEFFF"
             Margin="10"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
+            BorderBrush="#FAEBEFFF"
+            Click="btnSignIn_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -135,7 +142,8 @@
             Foreground="#FAEBEFFF"
             Margin="10"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
+            BorderBrush="#FAEBEFFF"
+            Click="btnRegister_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -154,7 +162,8 @@
             Foreground="#FAEBEFFF"
             Margin="10"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
+            BorderBrush="#FAEBEFFF"
+            Click="btnCloseApp_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

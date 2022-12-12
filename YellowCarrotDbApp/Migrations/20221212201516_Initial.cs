@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace YellowCarrotDbApp.Migrations
 {
     /// <inheritdoc />
@@ -102,6 +104,45 @@ namespace YellowCarrotDbApp.Migrations
                 table: "AppUsers",
                 column: "Username",
                 value: "user");
+
+            migrationBuilder.InsertData(
+                table: "Recipes",
+                columns: new[] { "RecipeId", "Name", "Username" },
+                values: new object[,]
+                {
+                    { 1, "Pancakes", "user" },
+                    { 2, "Cinnamon buns", "user" },
+                    { 3, "Tomato soup", "user" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Ingredients",
+                columns: new[] { "IngredientId", "Name", "Quantity", "RecipeId" },
+                values: new object[,]
+                {
+                    { 1, "Eggs", "2", 1 },
+                    { 2, "Milk", "3 dl", 1 },
+                    { 3, "Flour", "2 dl", 1 },
+                    { 4, "Salt", "1 ml", 1 },
+                    { 5, "Sugar", "0,5 dl", 1 },
+                    { 6, "Butter", "150 g", 2 },
+                    { 7, "Milk", "3 dl", 2 },
+                    { 8, "Sugar", "1,5 dl", 2 },
+                    { 9, "Salt", "1 ml", 2 },
+                    { 10, "Flour", "8 dl", 2 },
+                    { 11, "Cinnamon", "1 tbsp", 2 },
+                    { 12, "Yeast", "50 g", 2 },
+                    { 13, "Egg", "1", 2 },
+                    { 14, "Crushed loaf sugar", "1 tbsp", 2 },
+                    { 15, "Onion", "1", 3 },
+                    { 16, "Crushed tomatoes", "1 kg", 3 },
+                    { 17, "Tomato purée", "2 tbsp", 3 },
+                    { 18, "Vegetable broth", "7,5 dl", 3 },
+                    { 19, "Balsamic vinegar", "0,5 tbsp", 3 },
+                    { 20, "Cinnamon", "1 tbsp", 3 },
+                    { 21, "Oregano", "0,5 tbsp", 3 },
+                    { 22, "Salt", "1 ml", 3 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingredients_RecipeId",
