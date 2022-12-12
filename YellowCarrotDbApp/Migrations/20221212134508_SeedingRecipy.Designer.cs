@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YellowCarrotDbApp.Data;
 
@@ -10,9 +11,11 @@ using YellowCarrotDbApp.Data;
 namespace YellowCarrotDbApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212134508_SeedingRecipy")]
+    partial class SeedingRecipy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,21 +85,21 @@ namespace YellowCarrotDbApp.Migrations
                         {
                             IngredientId = 1,
                             Name = "Eggs",
-                            Quantity = "2",
+                            Quantity = "Two",
                             RecipeId = 1
                         },
                         new
                         {
                             IngredientId = 2,
                             Name = "Milk",
-                            Quantity = "3 dl",
+                            Quantity = "Three dl",
                             RecipeId = 1
                         },
                         new
                         {
                             IngredientId = 3,
                             Name = "Flour",
-                            Quantity = "2 dl",
+                            Quantity = "Two dl",
                             RecipeId = 1
                         },
                         new
@@ -112,125 +115,6 @@ namespace YellowCarrotDbApp.Migrations
                             Name = "Sugar",
                             Quantity = "0,5 dl",
                             RecipeId = 1
-                        },
-                        new
-                        {
-                            IngredientId = 6,
-                            Name = "Butter",
-                            Quantity = "150 g",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 7,
-                            Name = "Milk",
-                            Quantity = "3 dl",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 8,
-                            Name = "Sugar",
-                            Quantity = "1,5 dl",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 9,
-                            Name = "Salt",
-                            Quantity = "1 ml",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 10,
-                            Name = "Flour",
-                            Quantity = "8 dl",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 11,
-                            Name = "Cinnamon",
-                            Quantity = "1 tbsp",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 12,
-                            Name = "Yeast",
-                            Quantity = "50 g",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 13,
-                            Name = "Egg",
-                            Quantity = "1",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 14,
-                            Name = "Crushed loaf sugar",
-                            Quantity = "1 tbsp",
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            IngredientId = 15,
-                            Name = "Onion",
-                            Quantity = "1",
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            IngredientId = 16,
-                            Name = "Crushed tomatoes",
-                            Quantity = "1 kg",
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            IngredientId = 17,
-                            Name = "Tomato purée",
-                            Quantity = "2 tbsp",
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            IngredientId = 18,
-                            Name = "Vegetable broth",
-                            Quantity = "7,5 dl",
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            IngredientId = 19,
-                            Name = "Balsamic vinegar",
-                            Quantity = "0,5 tbsp",
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            IngredientId = 20,
-                            Name = "Cinnamon",
-                            Quantity = "1 tbsp",
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            IngredientId = 21,
-                            Name = "Oregano",
-                            Quantity = "0,5 tbsp",
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            IngredientId = 22,
-                            Name = "Salt",
-                            Quantity = "1 ml",
-                            RecipeId = 3
                         });
                 });
 
@@ -260,18 +144,6 @@ namespace YellowCarrotDbApp.Migrations
                         {
                             RecipeId = 1,
                             Name = "Pancakes",
-                            Username = "user"
-                        },
-                        new
-                        {
-                            RecipeId = 2,
-                            Name = "Cinnamon buns",
-                            Username = "user"
-                        },
-                        new
-                        {
-                            RecipeId = 3,
-                            Name = "Tomato soup",
                             Username = "user"
                         });
                 });
