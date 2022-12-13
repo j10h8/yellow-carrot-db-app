@@ -5,22 +5,15 @@ namespace YellowCarrotDbApp.Services
     public class UnitOfWork
     {
         private readonly AppDbContext _context;
-        private readonly UserDbContext _userContext;
 
         private IngredientRepository _ingredientRepository;
         private RecipeRepository _recipeRepository;
         private TagRepository _tagRepository;
-        private UserRepository _userRepository;
+        private AppUserRepository _appUserRepository;
 
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
-        }
-
-        public UnitOfWork(AppDbContext context, UserDbContext userContext)
-        {
-            _context = context;
-            _userContext = userContext;
         }
 
         public IngredientRepository IngredientRepository
@@ -62,18 +55,22 @@ namespace YellowCarrotDbApp.Services
             }
         }
 
-        public UserRepository UserRepository
+        public AppUserRepository AppUserRepository
         {
             get
             {
-                // TODO: Possibly change/add conditionals 
-                if (_userRepository == null && _userContext != null)
+                if (_appUserRepository == null)
                 {
-                    _userRepository = new(_userContext);
+                    _appUserRepository = new(_context);
                 }
 
-                return _userRepository;
+                return _appUserRepository;
             }
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
         }
     }
 }

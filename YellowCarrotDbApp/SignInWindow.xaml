@@ -169,23 +169,5 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button
-            Name="btnToRegisterWindow"
-            Grid.Column="0"
-            Grid.Row="7"
-            Grid.ColumnSpan="2"
-            Width="150"
-            Content="Register"
-            FontSize="18"
-            Background="CornflowerBlue"
-            Foreground="AliceBlue"
-            Margin="10"
-            BorderThickness="0">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
     </Grid>
 </Window>

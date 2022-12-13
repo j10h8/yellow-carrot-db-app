@@ -52,7 +52,10 @@ namespace YellowCarrotDbApp
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            RegisterWindow registerWindow = new();
+            registerWindow.Show();
 
+            Close();
         }
     }
 }
