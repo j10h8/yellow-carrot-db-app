@@ -62,17 +62,20 @@ namespace YellowCarrotDbApp
 
         private void btnDeleteEnabled_Click(object sender, RoutedEventArgs e)
         {
-            using (AppDbContext appContext = new())
+            ListViewItem item = (ListViewItem)lvRecipies.SelectedItem;
+            Recipe recipe = (Recipe)item.Tag;
+
+            if (recipe.User.Username == _signedInUserName)
             {
-                ListViewItem item = (ListViewItem)lvRecipies.SelectedItem;
-                Recipe recipe = (Recipe)item.Tag;
+                ConfirmDeleteWindow confirmDeleteWindow = new(_signedInUserName, recipe.Name);
+                confirmDeleteWindow.Show();
 
-                UnitOfWork uow = new(appContext);
-                uow.RecipeRepository.DeleteRecipe(recipe.Name);
-                uow.SaveChanges();
+                this.Close();
             }
-
-            UpdateUi();
+            else
+            {
+                MessageBox.Show("Deleting another users recipe is not allowed!", "Error!");
+            }
         }
 
         private void lvRecipies_SelectionChanged(object sender, SelectionChangedEventArgs e)

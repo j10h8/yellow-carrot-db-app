@@ -1,0 +1,88 @@
+﻿<Window x:Class="YellowCarrotDbApp.ConfirmDeleteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowCarrotDbApp"
+        mc:Ignorable="d"
+        Title="ConfirmDeleteWindow"
+        Height="300"
+        Width="600"
+        Background="#333D79FF"
+        FontFamily="Calibri"
+        FontSize="20"
+        WindowStartupLocation="CenterScreen"
+        MaxHeight="300"
+        MinHeight="300"
+        MaxWidth="600"
+        MinWidth="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Button
+            Name="btnConfirmDelete"
+            Grid.Column="1"
+            Grid.Row="2"
+            Width="100"
+            Height="40"
+            Content="Yes, delete!"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            Margin="10"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF"
+            HorizontalAlignment="Right"
+            Click="btnConfirmDelete_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnCancelDelete"
+            Grid.Column="3"
+            Grid.Row="2"
+            Width="100"
+            Height="40"
+            Content="No, cancel!"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            Margin="10"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF"
+            HorizontalAlignment="Left"
+            Click="btnCancelDelete_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock
+            Grid.Column="1"
+            Grid.Row="1"
+            Foreground="#FAEBEFFF"
+            FontSize="30"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Grid.ColumnSpan="3">
+            Are you sure you want to delete
+            <LineBreak/>
+            the selected recipe?
+        </TextBlock>
+    </Grid>
+</Window>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using YellowCarrotDbApp.Data;
 using YellowCarrotDbApp.Models;
@@ -16,7 +17,7 @@ namespace YellowCarrotDbApp.Services
 
         public List<Recipe> GetRecipies()
         {
-            return _context.Recipes.OrderBy(n => n.Name).ToList();
+            return _context.Recipes.Include(u => u.User).OrderBy(n => n.Name).ToList();
         }
 
         public void DeleteRecipe(string name)
