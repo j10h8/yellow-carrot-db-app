@@ -142,19 +142,19 @@ namespace YellowCarrotDbApp
                         uow.RecipeRepository.AddRecipe(txtRecipeName.Text.Trim(), _signedInUserName, _ingredients, _tags);
 
                         uow.SaveChanges();
+
+                        txtRecipeName.Clear();
+                        txtIngredient.Clear();
+                        txtQuantity.Clear();
+                        txtTag.Clear();
+                        _ingredients.Clear();
+                        _tags.Clear();
+
+                        UpdateUi();
+
+                        MessageBox.Show("Recipe has been added!", "Success!");
                     }
                 }
-
-                txtRecipeName.Clear();
-                txtIngredient.Clear();
-                txtQuantity.Clear();
-                txtTag.Clear();
-                _ingredients.Clear();
-                _tags.Clear();
-
-                UpdateUi();
-
-                MessageBox.Show("Recipe has been added!", "Success!");
             }
             else
             {
