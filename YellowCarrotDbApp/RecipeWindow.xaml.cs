@@ -57,7 +57,10 @@ namespace YellowCarrotDbApp
 
         private void btnAddRecipie_Click(object sender, RoutedEventArgs e)
         {
+            AddRecipeWindow addRecipeWindow = new(_signedInUserName);
+            addRecipeWindow.Show();
 
+            this.Close();
         }
 
         private void btnDeleteEnabled_Click(object sender, RoutedEventArgs e)
