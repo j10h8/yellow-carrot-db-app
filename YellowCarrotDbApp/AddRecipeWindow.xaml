@@ -39,10 +39,10 @@
         <Label
             Grid.Column="2"
             Grid.Row="1"
-            Content="- Add recipe -"
+            Content="Add recipe"
             FontFamily="Arial"
             Foreground="#FAEBEFFF"
-            FontSize="60"
+            FontSize="50"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             Grid.ColumnSpan="3"/>

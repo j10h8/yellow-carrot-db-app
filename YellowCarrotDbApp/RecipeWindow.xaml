@@ -28,93 +28,108 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label
-            Grid.Column="2"
-            Grid.Row="1"
-            Content="- Recipies -"
-            FontFamily="Arial"
-            Foreground="#FAEBEFFF"
-            FontSize="60"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            Grid.ColumnSpan="3"/>
-        <Label
+        <Button
+            Name="btnDetailsEnabled"
             Grid.Column="2"
             Grid.Row="2"
-            Content="User name:"
-            Foreground="#FAEBEFFF"
-            HorizontalContentAlignment="Right"
-            VerticalContentAlignment="Center"/>
-        <TextBox
-            Name="txtUserName"
-            Grid.Column="3"
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            Width="310"
+            Width="100"
             Height="40"
-            Background="#333D79FF" 
+            Content="Details"
+            FontSize="18"
+            Background="#333D79FF"
             Foreground="#FAEBEFFF"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            HorizontalContentAlignment="Left"
-            VerticalContentAlignment="Center"
-            BorderBrush="#FAEBEFFF"
+            Margin="10"
             BorderThickness="2"
-            MaxLength="24">
-            <TextBox.Resources>
+            BorderBrush="#FAEBEFFF"
+            Click="btnDetailsEnabled_Click"
+            Visibility="Hidden">
+            <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
-            </TextBox.Resources>
-        </TextBox>
-        <Label
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnDetailsDisabled"
+            Grid.Column="2"
+            Grid.Row="2"
+            Width="100"
+            Height="40"
+            Content="Details"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="Gray"
+            Margin="10"
+            BorderThickness="2"
+            BorderBrush="Gray">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnAddRecipie"
             Grid.Column="2"
             Grid.Row="3"
-            Content="Password:"
-            Foreground="#FAEBEFFF"
-            HorizontalContentAlignment="Right"
-            VerticalContentAlignment="Center"/>
-        <Border CornerRadius="5"
-                Grid.Row="3"
-                Grid.Column="3"
-                Grid.ColumnSpan="2"
-                Width="310"
-                Height="40"
-                HorizontalAlignment="Left"
-                BorderBrush="#FAEBEFFF"
-                BorderThickness="2">
-            <PasswordBox
-            Name="pbPassword"
+            Width="100"
+            Height="40"
+            Content="Add"
+            FontSize="18"
             Background="#333D79FF"
             Foreground="#FAEBEFFF"
-            Height="40"
-            VerticalAlignment="Center"
-            HorizontalContentAlignment="Left"
-            VerticalContentAlignment="Center"
-            BorderThickness="0"
-            MaxLength="24"/>
-        </Border>
+            Margin="10"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF"
+            Click="btnAddRecipie_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <Button
-            Name="btnSignIn"
-            Grid.Column="3"
+            Name="btnDeleteEnabled"
+            Grid.Column="2"
             Grid.Row="4"
             Width="100"
             Height="40"
-            Content="Sign in"
+            Content="Delete"
             FontSize="18"
             Background="#333D79FF"
             Foreground="#FAEBEFFF"
             Margin="10"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
+            BorderBrush="#FAEBEFFF"
+            Click="btnDeleteEnabled_Click"
+            Visibility="Hidden">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnDeleteDisabled"
+            Grid.Column="2"
+            Grid.Row="4"
+            Width="100"
+            Height="40"
+            Content="Delete"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="Gray"
+            Margin="10"
+            BorderThickness="2"
+            BorderBrush="Gray">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -123,43 +138,46 @@
         </Button>
         <Label
             Grid.Column="3"
-            Grid.Row="5"
-            Content="- or -"
+            Grid.Row="1"
+            Content="Recipies"
+            FontFamily="Arial"
             Foreground="#FAEBEFFF"
+            FontSize="50"
             HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"/>
-        <Button
-            Name="btnRegister"
+            VerticalContentAlignment="Center"
+            Grid.ColumnSpan="2"/>
+        <ListView
+            Name="lvRecipies"
             Grid.Column="3"
-            Grid.Row="6"
-            Width="100"
-            Height="40"
-            Content="Register"
-            FontSize="18"
-            Background="#333D79FF"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="4"
             Foreground="#FAEBEFFF"
-            Margin="10"
+            Background="#333D79FF"
+            BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
-            <Button.Resources>
+            SelectionMode="Single"
+            SelectionChanged="lvRecipies_SelectionChanged">
+            <ListView.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
-            </Button.Resources>
-        </Button>
+            </ListView.Resources>
+        </ListView>
         <Button
-            Name="btnCloseApp"
+            Name="btnSignOut"
             Grid.Column="5"
             Grid.Row="1"
             Width="100"
             Height="40"
-            Content="Close app"
+            Content="Sign out"
             FontSize="18"
             Background="#333D79FF"
             Foreground="#FAEBEFFF"
             Margin="10"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
+            BorderBrush="#FAEBEFFF"
+            Click="btnSignOut_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

@@ -9,8 +9,6 @@ namespace YellowCarrotDbApp
     /// </summary>
     public partial class SignInWindow : Window
     {
-        private string _signedInUserName;
-
         public SignInWindow()
         {
             InitializeComponent();
@@ -18,25 +16,23 @@ namespace YellowCarrotDbApp
 
         private void btnCloseApp_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (txtUserName.Text.Trim().Length > 0 && pbPassword.Password.Trim().Length > 0)
             {
-                using (UserDbContext context = new())
+                using (UserDbContext userContext = new())
                 {
-                    UserRepository userRepository = new(context);
+                    UserRepository userRepository = new(userContext);
 
                     if (userRepository.IsRegistered(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
                     {
-                        _signedInUserName = txtUserName.Text.Trim();
-
-                        RecipeWindow recipeWindow = new(_signedInUserName);
+                        RecipeWindow recipeWindow = new(txtUserName.Text.Trim());
                         recipeWindow.Show();
 
-                        Close();
+                        this.Close();
                     }
                     else
                     {
@@ -55,7 +51,7 @@ namespace YellowCarrotDbApp
             RegisterWindow registerWindow = new();
             registerWindow.Show();
 
-            Close();
+            this.Close();
         }
     }
 }
