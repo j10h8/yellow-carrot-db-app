@@ -21,7 +21,7 @@ namespace YellowCarrotDbApp
         }
 
         private void btnConfirmDelete_Click(object sender, RoutedEventArgs e)
-        {
+        {   // TODO: Implement cascade delete behaviour for Tag (since it's many to many relation with Recipe)
             using (AppDbContext appContext = new())
             {
                 UnitOfWork uow = new(appContext);

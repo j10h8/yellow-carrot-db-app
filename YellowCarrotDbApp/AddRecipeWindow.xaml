@@ -58,7 +58,7 @@
             Content="Ingredients"
             Foreground="#FAEBEFFF"
             HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
+            VerticalContentAlignment="Bottom"
             Grid.ColumnSpan="2"/>
         <Label
             Grid.Column="1"
@@ -71,7 +71,7 @@
         <Label
             Grid.Column="1"
             Grid.Row="4"
-            Content="Ingredient"
+            Content="Ingredient name"
             Foreground="#FAEBEFFF"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Bottom"/>
@@ -85,7 +85,7 @@
         <Label
             Grid.Column="1"
             Grid.Row="6"
-            Content="Tag"
+            Content="Tag description"
             Foreground="#FAEBEFFF"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Bottom"
@@ -105,7 +105,7 @@
             VerticalContentAlignment="Center"
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            MaxLength="24">
+            MaxLength="30">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -187,7 +187,8 @@
             Foreground="#FAEBEFFF"
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
-            VerticalAlignment="Top">
+            VerticalAlignment="Top"
+            Click="btnAddIngredient_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -206,7 +207,8 @@
             Foreground="#FAEBEFFF"
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
-            VerticalAlignment="Top">
+            VerticalAlignment="Top"
+            Click="btnTag_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -252,7 +254,8 @@
             Foreground="#FAEBEFFF"
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
-            HorizontalAlignment="Right">
+            HorizontalAlignment="Right"
+            Click="btnAddRecipe_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -291,7 +294,8 @@
             Foreground="#FAEBEFFF"
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
-            Visibility="Hidden">
+            Visibility="Hidden"
+            Click="btnDeleteIngredientEnabled_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -323,7 +327,7 @@
             Content="Tags"
             Foreground="#FAEBEFFF"
             HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
+            VerticalContentAlignment="Bottom"
             Grid.ColumnSpan="2"/>
         <ListView
             Name="lvTags"
@@ -357,7 +361,8 @@
             Foreground="#FAEBEFFF"
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
-            Visibility="Hidden">
+            Visibility="Hidden"
+            Click="btnDeleteTagEnabled_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
