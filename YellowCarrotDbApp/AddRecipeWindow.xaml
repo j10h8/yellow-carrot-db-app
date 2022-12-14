@@ -126,7 +126,8 @@
             VerticalContentAlignment="Center"
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            MaxLength="30">
+            MaxLength="30"
+            TextChanged="txtIngredient_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -147,7 +148,8 @@
             VerticalContentAlignment="Center"
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            MaxLength="30">
+            MaxLength="30"
+            TextChanged="txtIngredient_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -168,7 +170,8 @@
             VerticalContentAlignment="Center"
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            MaxLength="30">
+            MaxLength="30"
+            TextChanged="txtTag_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -176,7 +179,7 @@
             </TextBox.Resources>
         </TextBox>
         <Button
-            Name="btnAddIngredient"
+            Name="btnAddIngredientEnabled"
             Grid.Column="3"
             Grid.Row="5"
             Width="140"
@@ -188,7 +191,8 @@
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
             VerticalAlignment="Top"
-            Click="btnAddIngredient_Click">
+            Click="btnAddIngredientEnabled_Click"
+            Visibility="Hidden">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -196,7 +200,26 @@
             </Button.Resources>
         </Button>
         <Button
-            Name="btnAddTag"
+            Name="btnAddIngredientDisabled"
+            Grid.Column="3"
+            Grid.Row="5"
+            Width="140"
+            Height="40"
+            Content="Add ingredient ->"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="Gray"
+            BorderThickness="2"
+            BorderBrush="Gray"
+            VerticalAlignment="Top">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnAddTagEnabled"
             Grid.Column="3"
             Grid.Row="7"
             Width="140"
@@ -208,7 +231,27 @@
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
             VerticalAlignment="Top"
-            Click="btnAddTag_Click">
+            Visibility="Hidden"
+            Click="btnAddTagEnabled_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnAddTagDisabled"
+            Grid.Column="3"
+            Grid.Row="7"
+            Width="140"
+            Height="40"
+            Content="Add tag ->"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="Gray"
+            BorderThickness="2"
+            BorderBrush="Gray"
+            VerticalAlignment="Top">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

@@ -15,6 +15,10 @@ namespace YellowCarrotDbApp.Services
             _appContext = context;
         }
 
+        public Recipe GetRecipe(string recipeName)
+        {
+            return _appContext.Recipes.Include(u => u.User).Include(i => i.Ingredients).Include(t => t.Tags).First(r => r.Name == recipeName);
+        }
         public List<Recipe> GetRecipies()
         {
             return _appContext.Recipes.Include(u => u.User).OrderBy(n => n.Name).ToList();

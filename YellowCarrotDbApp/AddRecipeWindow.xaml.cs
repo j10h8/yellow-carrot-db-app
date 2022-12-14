@@ -59,30 +59,23 @@ namespace YellowCarrotDbApp
             }
         }
 
-        private void btnAddIngredient_Click(object sender, RoutedEventArgs e)
+        private void btnAddIngredientEnabled_Click(object sender, RoutedEventArgs e)
         {
-            if (txtIngredient.Text.Trim().Length > 0 && txtQuantity.Text.Trim().Length > 0)
+            Ingredient ingredient = new()
             {
-                Ingredient ingredient = new()
-                {
-                    Name = txtIngredient.Text.Trim(),
-                    Quantity = txtQuantity.Text.Trim()
-                };
+                Name = txtIngredient.Text.Trim(),
+                Quantity = txtQuantity.Text.Trim()
+            };
 
-                _ingredients.Add(ingredient);
+            _ingredients.Add(ingredient);
 
-                txtIngredient.Clear();
-                txtQuantity.Clear();
+            txtIngredient.Clear();
+            txtQuantity.Clear();
 
-                UpdateUi();
-            }
-            else
-            {
-                MessageBox.Show("Please specify ingredient name and quantity to add ingredient to recipe!", "Error!");
-            }
+            UpdateListViews();
         }
 
-        private void UpdateUi()
+        private void UpdateListViews()
         {
             lvIngredients.Items.Clear();
             lvTags.Items.Clear();
@@ -104,25 +97,18 @@ namespace YellowCarrotDbApp
             }
         }
 
-        private void btnAddTag_Click(object sender, RoutedEventArgs e)
+        private void btnAddTagEnabled_Click(object sender, RoutedEventArgs e)
         {
-            if (txtTag.Text.Trim().Length > 0)
+            Tag tag = new()
             {
-                Tag tag = new()
-                {
-                    Description = txtTag.Text.Trim()
-                };
+                Description = txtTag.Text.Trim()
+            };
 
-                _tags.Add(tag);
+            _tags.Add(tag);
 
-                txtTag.Clear();
+            txtTag.Clear();
 
-                UpdateUi();
-            }
-            else
-            {
-                MessageBox.Show("Please specify tag description to add tag to recipe!", "Error!");
-            }
+            UpdateListViews();
         }
 
         private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
@@ -150,7 +136,7 @@ namespace YellowCarrotDbApp
                         _ingredients.Clear();
                         _tags.Clear();
 
-                        UpdateUi();
+                        UpdateListViews();
 
                         MessageBox.Show("Recipe has been added!", "Success!");
                     }
@@ -164,12 +150,48 @@ namespace YellowCarrotDbApp
 
         private void btnDeleteIngredientEnabled_Click(object sender, RoutedEventArgs e)
         {
-            // Add delete ingredient logic 
+            ListViewItem ingredientItem = (ListViewItem)lvIngredients.SelectedItem;
+            Ingredient ingredient = (Ingredient)ingredientItem.Tag;
+            _ingredients.Remove(ingredient);
+
+            UpdateListViews();
         }
 
         private void btnDeleteTagEnabled_Click(object sender, RoutedEventArgs e)
         {
-            // Add delete Tag logic 
+            ListViewItem tagItem = (ListViewItem)lvTags.SelectedItem;
+            Tag tag = (Tag)tagItem.Tag;
+            _tags.Remove(tag);
+
+            UpdateListViews();
+        }
+
+        private void txtIngredient_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtIngredient.Text.Trim().Length > 0 && txtQuantity.Text.Trim().Length > 0)
+            {
+                btnAddIngredientDisabled.Visibility = Visibility.Hidden;
+                btnAddIngredientEnabled.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnAddIngredientDisabled.Visibility = Visibility.Visible;
+                btnAddIngredientEnabled.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void txtTag_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtTag.Text.Trim().Length > 0)
+            {
+                btnAddTagDisabled.Visibility = Visibility.Hidden;
+                btnAddTagEnabled.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnAddTagDisabled.Visibility = Visibility.Visible;
+                btnAddTagEnabled.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

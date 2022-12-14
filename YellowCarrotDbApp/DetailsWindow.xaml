@@ -24,20 +24,26 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Label
-            Grid.Column="2"
+            Grid.Column="3"
             Grid.Row="1"
             Content="Recipe details"
             FontFamily="Arial"
@@ -47,74 +53,225 @@
             VerticalContentAlignment="Center"
             Grid.ColumnSpan="3"/>
         <Label
-            Grid.Column="2"
+            Grid.Column="4"
             Grid.Row="2"
-            Content="User name:"
+            Content="Ingredients"
+            Foreground="#FAEBEFFF"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Bottom"
+            Grid.ColumnSpan="2"/>
+        <Label
+            Grid.Column="1"
+            Grid.Row="2"
+            Content="Recipe name"
             Foreground="#FAEBEFFF"
             HorizontalContentAlignment="Right"
-            VerticalContentAlignment="Center"/>
+            VerticalContentAlignment="Bottom"
+            Grid.ColumnSpan="2"/>
+        <Label
+            Grid.Column="1"
+            Grid.Row="4"
+            Content="Ingredient name"
+            Foreground="#FAEBEFFF"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Bottom"/>
+        <Label
+            Grid.Column="2"
+            Grid.Row="4"
+            Content="Quantity"
+            Foreground="#FAEBEFFF"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Bottom"/>
+        <Label
+            Grid.Column="1"
+            Grid.Row="6"
+            Content="Tag description"
+            Foreground="#FAEBEFFF"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Bottom"
+            Grid.ColumnSpan="2"/>
         <TextBox
-            Name="txtUserName"
-            Grid.Column="3"
-            Grid.Row="2"
+            Name="txtRecipeName"
+            Grid.Column="1"
+            Grid.Row="3"
             Grid.ColumnSpan="2"
-            Width="310"
             Height="40"
+            Width="320"
             Background="#333D79FF" 
             Foreground="#FAEBEFFF"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            HorizontalContentAlignment="Left"
+            HorizontalAlignment="Right"
+            VerticalAlignment="top"
+            HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            MaxLength="24">
+            MaxLength="30">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Label
-            Grid.Column="2"
-            Grid.Row="3"
-            Content="Password:"
+        <TextBox
+            Name="txtIngredient"
+            Grid.Column="1"
+            Grid.Row="5"
+            Height="40"
+            Width="160"
+            Background="#333D79FF" 
             Foreground="#FAEBEFFF"
+            HorizontalAlignment="Right"
+            VerticalAlignment="top"
             HorizontalContentAlignment="Right"
-            VerticalContentAlignment="Center"/>
-        <Border CornerRadius="5"
-                Grid.Row="3"
-                Grid.Column="3"
-                Grid.ColumnSpan="2"
-                Width="310"
-                Height="40"
-                HorizontalAlignment="Left"
-                BorderBrush="#FAEBEFFF"
-                BorderThickness="2">
-            <PasswordBox
-            Name="pbPassword"
-            Background="#333D79FF"
-            Foreground="#FAEBEFFF"
-            Height="40"
-            VerticalAlignment="Center"
-            HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
-            BorderThickness="0"
-            MaxLength="24"/>
-        </Border>
-        <Button
-            Name="btnSignIn"
-            Grid.Column="3"
-            Grid.Row="4"
-            Width="100"
+            BorderBrush="#FAEBEFFF"
+            BorderThickness="2"
+            MaxLength="30"
+            TextChanged="txtIngredient_TextChanged">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox
+            Name="txtQuantity"
+            Grid.Column="2"
+            Grid.Row="5"
             Height="40"
-            Content="Sign in"
+            Width="160"
+            Background="#333D79FF" 
+            Foreground="#FAEBEFFF"
+            HorizontalAlignment="Right"
+            VerticalAlignment="top"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            BorderBrush="#FAEBEFFF"
+            BorderThickness="2"
+            MaxLength="30"
+            TextChanged="txtIngredient_TextChanged">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox
+            Name="txtTag"
+            Grid.Column="2"
+            Grid.Row="7"
+            Height="40"
+            Width="160"
+            Background="#333D79FF" 
+            Foreground="#FAEBEFFF"
+            HorizontalAlignment="Right"
+            VerticalAlignment="top"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            BorderBrush="#FAEBEFFF"
+            BorderThickness="2"
+            MaxLength="30"
+            TextChanged="txtTag_TextChanged">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Button
+            Name="btnAddIngredientEnabled"
+            Grid.Column="3"
+            Grid.Row="5"
+            Width="140"
+            Height="40"
+            Content="Add ingredient ->"
             FontSize="18"
             Background="#333D79FF"
             Foreground="#FAEBEFFF"
-            Margin="10"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
+            BorderBrush="#FAEBEFFF"
+            VerticalAlignment="Top"
+            Click="btnAddIngredientEnabled_Click"
+            Visibility="Hidden">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnAddIngredientDisabled"
+            Grid.Column="3"
+            Grid.Row="5"
+            Width="140"
+            Height="40"
+            Content="Add ingredient ->"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="Gray"
+            BorderThickness="2"
+            BorderBrush="Gray"
+            VerticalAlignment="Top">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnAddTagEnabled"
+            Grid.Column="3"
+            Grid.Row="7"
+            Width="140"
+            Height="40"
+            Content="Add tag ->"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF"
+            VerticalAlignment="Top"
+            Visibility="Hidden"
+            Click="btnAddTagEnabled_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnAddTagDisabled"
+            Grid.Column="3"
+            Grid.Row="7"
+            Width="140"
+            Height="40"
+            Content="Add tag ->"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="Gray"
+            BorderThickness="2"
+            BorderBrush="Gray"
+            VerticalAlignment="Top">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnCancel"
+            Grid.Column="5"
+            Grid.Row="10"
+            Width="140"
+            Height="40"
+            Content="Cancel"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF"
+            HorizontalAlignment="Left"
+            Click="btnCancel_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -122,25 +279,66 @@
             </Button.Resources>
         </Button>
         <Label
-            Grid.Column="3"
-            Grid.Row="5"
+            Grid.Column="4"
+            Grid.Row="10"
             Content="- or -"
             Foreground="#FAEBEFFF"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"/>
         <Button
-            Name="btnRegister"
+            Name="btnAddRecipe"
             Grid.Column="3"
-            Grid.Row="6"
-            Width="100"
+            Grid.Row="10"
+            Width="140"
             Height="40"
-            Content="Register"
+            Content="Add recipe"
             FontSize="18"
             Background="#333D79FF"
             Foreground="#FAEBEFFF"
-            Margin="10"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
+            BorderBrush="#FAEBEFFF"
+            HorizontalAlignment="Right"
+            Click="btnAddRecipe_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <ListView
+            Name="lvIngredients"
+            Grid.Column="4"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="5"
+            Foreground="#FAEBEFFF"
+            Background="#333D79FF"
+            BorderBrush="#FAEBEFFF"
+            BorderThickness="2"
+            SelectionMode="Single"
+            Margin="10 0 10 10"
+            SelectionChanged="lvIngredients_SelectionChanged">
+            <ListView.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ListView.Resources>
+        </ListView>
+        <Button
+            Name="btnDeleteIngredientEnabled"
+            Grid.Column="4"
+            Grid.Row="8"
+            Grid.ColumnSpan="2"
+            Width="140"
+            Height="40"
+            Content="Delete ingredient"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF"
+            Visibility="Hidden"
+            Click="btnDeleteIngredientEnabled_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -148,18 +346,85 @@
             </Button.Resources>
         </Button>
         <Button
-            Name="btnCloseApp"
-            Grid.Column="5"
-            Grid.Row="1"
-            Width="100"
+            Name="btnDeleteIngredientDisabled"
+            Grid.Column="4"
+            Grid.Row="8"
+            Grid.ColumnSpan="2"
+            Width="140"
             Height="40"
-            Content="Close app"
+            Content="Delete ingredient"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="Gray"
+            BorderThickness="2"
+            BorderBrush="Gray">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label
+            Grid.Column="6"
+            Grid.Row="2"
+            Content="Tags"
+            Foreground="#FAEBEFFF"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Bottom"
+            Grid.ColumnSpan="2"/>
+        <ListView
+            Name="lvTags"
+            Grid.Column="6"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="5"
+            Foreground="#FAEBEFFF"
+            Background="#333D79FF"
+            BorderBrush="#FAEBEFFF"
+            BorderThickness="2"
+            SelectionMode="Single"
+            Margin="10 0 10 10"
+            SelectionChanged="lvTags_SelectionChanged">
+            <ListView.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ListView.Resources>
+        </ListView>
+        <Button
+            Name="btnDeleteTagEnabled"
+            Grid.Column="6"
+            Grid.Row="8"
+            Grid.ColumnSpan="2"
+            Width="140"
+            Height="40"
+            Content="Delete tag"
             FontSize="18"
             Background="#333D79FF"
             Foreground="#FAEBEFFF"
-            Margin="10"
             BorderThickness="2"
-            BorderBrush="#FAEBEFFF">
+            BorderBrush="#FAEBEFFF"
+            Visibility="Hidden"
+            Click="btnDeleteTagEnabled_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnDeleteTagDisabled"
+            Grid.Column="6"
+            Grid.Row="8"
+            Grid.ColumnSpan="2"
+            Width="140"
+            Height="40"
+            Content="Delete tag"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="Gray"
+            BorderThickness="2"
+            BorderBrush="Gray">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

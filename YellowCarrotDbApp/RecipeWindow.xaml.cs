@@ -30,11 +30,11 @@ namespace YellowCarrotDbApp
             {
                 UnitOfWork uow = new(appContext);
 
-                foreach (Recipe recipie in uow.RecipeRepository.GetRecipies())
+                foreach (Recipe recipe in uow.RecipeRepository.GetRecipies())
                 {
                     ListViewItem item = new();
-                    item.Content = recipie.Name;
-                    item.Tag = recipie;
+                    item.Content = recipe.Name;
+                    item.Tag = recipe;
                     lvRecipies.Items.Add(item);
                 }
 
@@ -52,7 +52,13 @@ namespace YellowCarrotDbApp
 
         private void btnDetailsEnabled_Click(object sender, RoutedEventArgs e)
         {
+            ListViewItem recipeItem = (ListViewItem)lvRecipies.SelectedItem;
+            Recipe recipe = (Recipe)recipeItem.Tag;
 
+            DetailsWindow detailsWindow = new(_signedInUserName, recipe.Name);
+            detailsWindow.Show();
+
+            this.Close();
         }
 
         private void btnAddRecipie_Click(object sender, RoutedEventArgs e)
