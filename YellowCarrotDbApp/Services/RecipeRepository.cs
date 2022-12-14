@@ -22,6 +22,11 @@ namespace YellowCarrotDbApp.Services
 
         public void DeleteRecipe(string name)
         {
+            foreach (Tag tag in _appContext.Recipes.Include(t => t.Tags).First(r => r.Name == name).Tags)
+            {
+                _appContext.Tags.Remove(tag);
+            }
+
             _appContext.Recipes.Remove(_appContext.Recipes.First(r => r.Name == name));
         }
 

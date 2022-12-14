@@ -73,13 +73,15 @@
             </Button.Resources>
         </Button>
         <TextBlock
+            Name="tblQuestion"
             Grid.Column="1"
             Grid.Row="1"
             Foreground="#FAEBEFFF"
             FontSize="30"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Grid.ColumnSpan="3">
+            Grid.ColumnSpan="3"
+            TextWrapping="Wrap">
             Are you sure you want to delete
             <LineBreak/>
             the selected recipe?

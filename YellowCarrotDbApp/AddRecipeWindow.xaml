@@ -196,7 +196,7 @@
             </Button.Resources>
         </Button>
         <Button
-            Name="btnTag"
+            Name="btnAddTag"
             Grid.Column="3"
             Grid.Row="7"
             Width="140"
@@ -208,7 +208,7 @@
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
             VerticalAlignment="Top"
-            Click="btnTag_Click">
+            Click="btnAddTag_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

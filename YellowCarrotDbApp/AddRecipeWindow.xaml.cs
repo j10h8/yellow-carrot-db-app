@@ -104,7 +104,7 @@ namespace YellowCarrotDbApp
             }
         }
 
-        private void btnTag_Click(object sender, RoutedEventArgs e)
+        private void btnAddTag_Click(object sender, RoutedEventArgs e)
         {
             if (txtTag.Text.Trim().Length > 0)
             {
@@ -144,6 +144,17 @@ namespace YellowCarrotDbApp
                         uow.SaveChanges();
                     }
                 }
+
+                txtRecipeName.Clear();
+                txtIngredient.Clear();
+                txtQuantity.Clear();
+                txtTag.Clear();
+                _ingredients.Clear();
+                _tags.Clear();
+
+                UpdateUi();
+
+                MessageBox.Show("Recipe has been added!", "Success!");
             }
             else
             {

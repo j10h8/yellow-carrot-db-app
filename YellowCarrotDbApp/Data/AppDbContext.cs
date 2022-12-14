@@ -231,8 +231,6 @@ namespace YellowCarrotDbApp.Data
                 Quantity = "1 ml",
                 RecipeId = 3
             });
-
-            // TODO: implement delete behaviour if necessary 
         }
     }
 }

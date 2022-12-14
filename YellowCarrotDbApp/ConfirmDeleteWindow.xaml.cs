@@ -18,6 +18,8 @@ namespace YellowCarrotDbApp
             _recipeName = recipeName;
 
             InitializeComponent();
+
+            tblQuestion.Text = $"Are you sure you want to delete the selected recipe ({recipeName})?";
         }
 
         private void btnConfirmDelete_Click(object sender, RoutedEventArgs e)
