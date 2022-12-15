@@ -24,12 +24,20 @@ namespace YellowCarrotDbApp.Services
             return _appContext.Recipes.Include(u => u.User).OrderBy(n => n.Name).ToList();
         }
 
+        public void UpdateRecipe(string oldRecipeName, string newRecipeName, string username, List<Ingredient> ingredients, List<Tag> tags)
+        {
+            Recipe recipe = GetRecipe(oldRecipeName);
+            recipe.Name = newRecipeName;
+            recipe.Username = username;
+            recipe.Ingredients = ingredients;
+            recipe.Tags = tags;
+
+            _appContext.Recipes.Update(recipe);
+        }
+
         public void DeleteRecipe(string recipeName)
         {
-            foreach (Tag tag in _appContext.Recipes.Include(t => t.Tags).First(r => r.Name == recipeName).Tags)
-            {
-                _appContext.Tags.Remove(tag);
-            }
+            DeleteTags(recipeName);
 
             _appContext.Recipes.Remove(_appContext.Recipes.First(r => r.Name == recipeName));
         }
@@ -55,6 +63,14 @@ namespace YellowCarrotDbApp.Services
             };
 
             _appContext.Recipes.Add(recipe);
+        }
+
+        public void DeleteTags(string recipeName)
+        {
+            foreach (Tag tag in _appContext.Recipes.Include(t => t.Tags).First(r => r.Name == recipeName).Tags)
+            {
+                _appContext.Tags.Remove(tag);
+            }
         }
     }
 }

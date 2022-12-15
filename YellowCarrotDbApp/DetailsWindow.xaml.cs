@@ -13,29 +13,34 @@ namespace YellowCarrotDbApp
     public partial class DetailsWindow : Window
     {
         private string _signedInUserName;
-        private string _recipeName;
+        private string _oldRecipeName;
         private Recipe _recipe = new();
         private List<Ingredient> _ingredients = new();
         private List<Tag> _tags = new();
 
-        public DetailsWindow(string signedInUserName, string recipeName)
+        public DetailsWindow(string signedInUserName, string oldRecipeName)
         {
             _signedInUserName = signedInUserName;
-            _recipeName = recipeName;
+            _oldRecipeName = oldRecipeName;
 
             InitializeComponent();
 
+            SetRecipe();
+
+            UpdateListViews();
+        }
+
+        private void SetRecipe()
+        {
             using (AppDbContext appContext = new())
             {
                 UnitOfWork uow = new(appContext);
-                _recipe = (Recipe)uow.RecipeRepository.GetRecipe(_recipeName);
+                _recipe = (Recipe)uow.RecipeRepository.GetRecipe(_oldRecipeName);
                 _ingredients = _recipe.Ingredients;
                 _tags = _recipe.Tags;
                 txtRecipeName.Text = _recipe.Name;
                 uow.SaveChanges();
             }
-
-            UpdateListViews();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -126,7 +131,6 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
-        // TODO: Change to update-logic ******************************************************************************************************************************
         private void btnSaveRecipe_Click(object sender, RoutedEventArgs e)
         {
             if (txtRecipeName.Text.Trim().Length > 0 && _ingredients.Count > 1 && _tags.Count > 0)
@@ -141,24 +145,43 @@ namespace YellowCarrotDbApp
                     }
                     else
                     {
-                        Recipe recipe = _recipe;
-                        recipe.Ingredients = _ingredients;
-                        recipe.Tags = _tags;
+                        List<Tag> newTagList = new();
 
-                        uow.RecipeRepository.DeleteRecipe(_recipe.Name);
+                        foreach (Tag tag in _tags)
+                        {
+                            Tag newTag = new()
+                            {
+                                Description = tag.Description
+                            };
+
+                            newTagList.Add(newTag);
+                        }
+
+                        uow.RecipeRepository.DeleteTags(_recipe.Name);
+
+                        List<Ingredient> newIngredientList = new();
+
+                        foreach (Ingredient ingredient in _ingredients)
+                        {
+                            Ingredient newIngredient = new()
+                            {
+                                Name = ingredient.Name,
+                                Quantity = ingredient.Quantity
+                            };
+
+                            newIngredientList.Add(newIngredient);
+                        }
+
+                        uow.RecipeRepository.UpdateRecipe(_oldRecipeName, txtRecipeName.Text.Trim(), _signedInUserName, newIngredientList, newTagList);
 
                         uow.SaveChanges();
 
-                        uow.RecipeRepository.AddRecipe(txtRecipeName.Text.Trim(), _signedInUserName, recipe.Ingredients, recipe.Tags);
-
-                        uow.SaveChanges();
-
-                        txtRecipeName.Clear();
                         txtIngredient.Clear();
                         txtQuantity.Clear();
                         txtTag.Clear();
-                        _ingredients.Clear();
-                        _tags.Clear();
+                        _oldRecipeName = txtRecipeName.Text.Trim();
+
+                        SetRecipe();
 
                         UpdateListViews();
 
@@ -171,7 +194,7 @@ namespace YellowCarrotDbApp
             }
             else
             {
-                MessageBox.Show("Please specify recipe name, and add at least two ingredients and one tag to the recipe!", "Error!");
+                MessageBox.Show("Please specify recipe name and add at least two ingredients and one tag!", "Error!");
             }
         }
 
@@ -235,7 +258,7 @@ namespace YellowCarrotDbApp
                 btnUnlock.Visibility = Visibility.Hidden;
                 btnSaveRecipe.Visibility = Visibility.Visible;
 
-                MessageBox.Show("Recipe is unlocked!", "Success!");
+                MessageBox.Show("Recipe has been unlocked!", "Success!");
             }
             else
             {
