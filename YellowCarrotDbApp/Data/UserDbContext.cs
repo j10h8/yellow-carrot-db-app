@@ -36,7 +36,6 @@ namespace YellowCarrotDbApp.Data
                 Username = "user",
                 Password = "password"
             });
-            // TODO: implement delete behaviour if found necessary 
         }
     }
 }
