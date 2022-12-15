@@ -11,7 +11,7 @@ using YellowCarrotDbApp.Data;
 namespace YellowCarrotDbApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221214200429_Initial1")]
+    [Migration("20221215092541_Initial1")]
     partial class Initial1
     {
         /// <inheritdoc />

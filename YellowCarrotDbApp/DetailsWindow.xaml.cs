@@ -127,7 +127,7 @@ namespace YellowCarrotDbApp
         }
 
         // TODO: Change to update-logic ******************************************************************************************************************************
-        private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
+        private void btnSaveRecipe_Click(object sender, RoutedEventArgs e)
         {
             if (txtRecipeName.Text.Trim().Length > 0 && _ingredients.Count > 1 && _tags.Count > 0)
             {
@@ -135,13 +135,21 @@ namespace YellowCarrotDbApp
                 {
                     UnitOfWork uow = new(appContext);
 
-                    if (uow.RecipeRepository.IsUsed(txtRecipeName.Text.Trim()))
+                    if (_recipe.Name != txtRecipeName.Text.Trim() && uow.RecipeRepository.IsUsed(txtRecipeName.Text.Trim()))
                     {
                         MessageBox.Show("Recipe name is already used. Please choose another one!", "Error!");
                     }
                     else
                     {
-                        uow.RecipeRepository.AddRecipe(txtRecipeName.Text.Trim(), _signedInUserName, _ingredients, _tags);
+                        Recipe recipe = _recipe;
+                        recipe.Ingredients = _ingredients;
+                        recipe.Tags = _tags;
+
+                        uow.RecipeRepository.DeleteRecipe(_recipe.Name);
+
+                        uow.SaveChanges();
+
+                        uow.RecipeRepository.AddRecipe(txtRecipeName.Text.Trim(), _signedInUserName, recipe.Ingredients, recipe.Tags);
 
                         uow.SaveChanges();
 
@@ -154,7 +162,10 @@ namespace YellowCarrotDbApp
 
                         UpdateListViews();
 
-                        MessageBox.Show("Recipe has been added!", "Success!");
+                        btnUnlock.Visibility = Visibility.Visible;
+                        btnSaveRecipe.Visibility = Visibility.Hidden;
+
+                        MessageBox.Show("Recipe has been saved!", "Success!");
                     }
                 }
             }
@@ -207,6 +218,28 @@ namespace YellowCarrotDbApp
             {
                 btnAddTagDisabled.Visibility = Visibility.Visible;
                 btnAddTagEnabled.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnUnlock_Click(object sender, RoutedEventArgs e)
+        {
+            if (_signedInUserName == _recipe.User.Username)
+            {
+                txtRecipeName.IsReadOnly = false;
+                txtIngredient.IsReadOnly = false;
+                txtQuantity.IsReadOnly = false;
+                txtTag.IsReadOnly = false;
+                lvIngredients.IsHitTestVisible = true;
+                lvTags.IsHitTestVisible = true;
+
+                btnUnlock.Visibility = Visibility.Hidden;
+                btnSaveRecipe.Visibility = Visibility.Visible;
+
+                MessageBox.Show("Recipe is unlocked!", "Success!");
+            }
+            else
+            {
+                MessageBox.Show("Unlocking other users recipies is not allowed!", "Error!");
             }
         }
     }

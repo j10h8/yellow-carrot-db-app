@@ -105,7 +105,8 @@
             VerticalContentAlignment="Center"
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            MaxLength="30">
+            MaxLength="30"
+            IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -127,6 +128,7 @@
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
             MaxLength="30"
+            IsReadOnly="True"
             TextChanged="txtIngredient_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
@@ -149,6 +151,7 @@
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
             MaxLength="30"
+            IsReadOnly="True"
             TextChanged="txtIngredient_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
@@ -171,6 +174,7 @@
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
             MaxLength="30"
+            IsReadOnly="True"
             TextChanged="txtTag_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
@@ -286,19 +290,40 @@
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"/>
         <Button
-            Name="btnAddRecipe"
+            Name="btnSaveRecipe"
             Grid.Column="3"
             Grid.Row="10"
             Width="140"
             Height="40"
-            Content="Add recipe"
+            Content="Save"
             FontSize="18"
             Background="#333D79FF"
             Foreground="#FAEBEFFF"
             BorderThickness="2"
             BorderBrush="#FAEBEFFF"
             HorizontalAlignment="Right"
-            Click="btnAddRecipe_Click">
+            Visibility="Hidden"
+            Click="btnSaveRecipe_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnUnlock"
+            Grid.Column="3"
+            Grid.Row="10"
+            Width="140"
+            Height="40"
+            Content="Unlock"
+            FontSize="18"
+            Background="#333D79FF"
+            Foreground="#FAEBEFFF"
+            BorderThickness="2"
+            BorderBrush="#FAEBEFFF"
+            HorizontalAlignment="Right"
+            Click="btnUnlock_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -315,7 +340,7 @@
             Background="#333D79FF"
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            SelectionMode="Single"
+            IsHitTestVisible="False"
             Margin="10 0 10 10"
             SelectionChanged="lvIngredients_SelectionChanged">
             <ListView.Resources>
@@ -384,6 +409,7 @@
             BorderThickness="2"
             SelectionMode="Single"
             Margin="10 0 10 10"
+            IsHitTestVisible="False"
             SelectionChanged="lvTags_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="Border">

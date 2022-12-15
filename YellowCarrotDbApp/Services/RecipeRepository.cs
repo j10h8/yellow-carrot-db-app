@@ -24,14 +24,14 @@ namespace YellowCarrotDbApp.Services
             return _appContext.Recipes.Include(u => u.User).OrderBy(n => n.Name).ToList();
         }
 
-        public void DeleteRecipe(string name)
+        public void DeleteRecipe(string recipeName)
         {
-            foreach (Tag tag in _appContext.Recipes.Include(t => t.Tags).First(r => r.Name == name).Tags)
+            foreach (Tag tag in _appContext.Recipes.Include(t => t.Tags).First(r => r.Name == recipeName).Tags)
             {
                 _appContext.Tags.Remove(tag);
             }
 
-            _appContext.Recipes.Remove(_appContext.Recipes.First(r => r.Name == name));
+            _appContext.Recipes.Remove(_appContext.Recipes.First(r => r.Name == recipeName));
         }
 
         public bool IsUsed(string recipeName)
