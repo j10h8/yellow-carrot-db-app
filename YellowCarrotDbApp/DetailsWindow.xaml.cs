@@ -44,39 +44,47 @@ namespace YellowCarrotDbApp
             }
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void UpdateListViews()
         {
-            RecipeWindow recipeWindow = new(_signedInUserName);
-            recipeWindow.Show();
+            lvIngredients.Items.Clear();
+            lvTags.Items.Clear();
 
-            this.Close();
+            foreach (Ingredient ingredient in _ingredients.OrderBy(i => i.Name).ToList())
+            {
+                ListViewItem ingredientItem = new();
+                ingredientItem.Content = $"{ingredient.Name} ({ingredient.Quantity})";
+                ingredientItem.Tag = ingredient;
+                lvIngredients.Items.Add(ingredientItem);
+            }
+
+            foreach (Tag tag in _tags.OrderBy(t => t.Description).ToList())
+            {
+                ListViewItem tagItem = new();
+                tagItem.Content = tag.Description;
+                tagItem.Tag = tag;
+                lvTags.Items.Add(tagItem);
+            }
         }
 
-        private void lvIngredients_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void btnUnlock_Click(object sender, RoutedEventArgs e)
         {
-            if (lvIngredients.SelectedItems.Count > 0 && txtRecipeName.IsReadOnly == false)
+            if (_signedInUserName == _recipe.User.Username)
             {
-                btnDeleteIngredientDisabled.Visibility = Visibility.Hidden;
-                btnDeleteIngredientEnabled.Visibility = Visibility.Visible;
+                txtRecipeName.IsReadOnly = false;
+                txtIngredient.IsReadOnly = false;
+                txtQuantity.IsReadOnly = false;
+                txtTag.IsReadOnly = false;
+                lvIngredients.UnselectAll();
+                lvTags.UnselectAll();
+
+                btnUnlock.Visibility = Visibility.Hidden;
+                btnSaveRecipe.Visibility = Visibility.Visible;
+
+                MessageBox.Show("Recipe has been unlocked!", "Success!");
             }
             else
             {
-                btnDeleteIngredientDisabled.Visibility = Visibility.Visible;
-                btnDeleteIngredientEnabled.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private void lvTags_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if (lvTags.SelectedItems.Count > 0 && txtRecipeName.IsReadOnly == false)
-            {
-                btnDeleteTagDisabled.Visibility = Visibility.Hidden;
-                btnDeleteTagEnabled.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                btnDeleteTagDisabled.Visibility = Visibility.Visible;
-                btnDeleteTagEnabled.Visibility = Visibility.Hidden;
+                MessageBox.Show("Unlocking other users recipies is not allowed!", "Error!");
             }
         }
 
@@ -96,26 +104,13 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
-        private void UpdateListViews()
+        private void btnDeleteIngredientEnabled_Click(object sender, RoutedEventArgs e)
         {
-            lvIngredients.Items.Clear();
-            lvTags.Items.Clear();
+            ListViewItem ingredientItem = (ListViewItem)lvIngredients.SelectedItem;
+            Ingredient ingredient = (Ingredient)ingredientItem.Tag;
+            _ingredients.Remove(ingredient);
 
-            foreach (Ingredient ingredient in _ingredients.OrderBy(i => i.Name).ToList())
-            {
-                ListViewItem ingredientItem = new();
-                ingredientItem.Content = $"{ingredient.Name}, {ingredient.Quantity}";
-                ingredientItem.Tag = ingredient;
-                lvIngredients.Items.Add(ingredientItem);
-            }
-
-            foreach (Tag tag in _tags.OrderBy(t => t.Description).ToList())
-            {
-                ListViewItem tagItem = new();
-                tagItem.Content = tag.Description;
-                tagItem.Tag = tag;
-                lvTags.Items.Add(tagItem);
-            }
+            UpdateListViews();
         }
 
         private void btnAddTagEnabled_Click(object sender, RoutedEventArgs e)
@@ -128,6 +123,15 @@ namespace YellowCarrotDbApp
             _tags.Add(tag);
 
             txtTag.Clear();
+
+            UpdateListViews();
+        }
+
+        private void btnDeleteTagEnabled_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewItem tagItem = (ListViewItem)lvTags.SelectedItem;
+            Tag tag = (Tag)tagItem.Tag;
+            _tags.Remove(tag);
 
             UpdateListViews();
         }
@@ -159,19 +163,6 @@ namespace YellowCarrotDbApp
                         }
 
                         uow.RecipeRepository.DeleteTags(_recipe.Name);
-
-                        //List<Ingredient> newIngredientList = new();
-
-                        //foreach (Ingredient ingredient in _ingredients)
-                        //{
-                        //    Ingredient newIngredient = new()
-                        //    {
-                        //        Name = ingredient.Name,
-                        //        Quantity = ingredient.Quantity
-                        //    };
-
-                        //    newIngredientList.Add(newIngredient);
-                        //}
 
                         uow.RecipeRepository.UpdateRecipe(_oldRecipeName, txtRecipeName.Text.Trim(), _signedInUserName, _ingredients, newTagList);
 
@@ -206,24 +197,6 @@ namespace YellowCarrotDbApp
             }
         }
 
-        private void btnDeleteIngredientEnabled_Click(object sender, RoutedEventArgs e)
-        {
-            ListViewItem ingredientItem = (ListViewItem)lvIngredients.SelectedItem;
-            Ingredient ingredient = (Ingredient)ingredientItem.Tag;
-            _ingredients.Remove(ingredient);
-
-            UpdateListViews();
-        }
-
-        private void btnDeleteTagEnabled_Click(object sender, RoutedEventArgs e)
-        {
-            ListViewItem tagItem = (ListViewItem)lvTags.SelectedItem;
-            Tag tag = (Tag)tagItem.Tag;
-            _tags.Remove(tag);
-
-            UpdateListViews();
-        }
-
         private void txtIngredient_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtIngredient.Text.Trim().Length > 0 && txtQuantity.Text.Trim().Length > 0)
@@ -252,26 +225,40 @@ namespace YellowCarrotDbApp
             }
         }
 
-        private void btnUnlock_Click(object sender, RoutedEventArgs e)
+        private void lvIngredients_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (_signedInUserName == _recipe.User.Username)
+            if (lvIngredients.SelectedItems.Count > 0 && txtRecipeName.IsReadOnly == false)
             {
-                txtRecipeName.IsReadOnly = false;
-                txtIngredient.IsReadOnly = false;
-                txtQuantity.IsReadOnly = false;
-                txtTag.IsReadOnly = false;
-                lvIngredients.UnselectAll();
-                lvTags.UnselectAll();
-
-                btnUnlock.Visibility = Visibility.Hidden;
-                btnSaveRecipe.Visibility = Visibility.Visible;
-
-                MessageBox.Show("Recipe has been unlocked!", "Success!");
+                btnDeleteIngredientDisabled.Visibility = Visibility.Hidden;
+                btnDeleteIngredientEnabled.Visibility = Visibility.Visible;
             }
             else
             {
-                MessageBox.Show("Unlocking other users recipies is not allowed!", "Error!");
+                btnDeleteIngredientDisabled.Visibility = Visibility.Visible;
+                btnDeleteIngredientEnabled.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void lvTags_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (lvTags.SelectedItems.Count > 0 && txtRecipeName.IsReadOnly == false)
+            {
+                btnDeleteTagDisabled.Visibility = Visibility.Hidden;
+                btnDeleteTagEnabled.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnDeleteTagDisabled.Visibility = Visibility.Visible;
+                btnDeleteTagEnabled.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            RecipeWindow recipeWindow = new(_signedInUserName);
+            recipeWindow.Show();
+
+            this.Close();
         }
     }
 }

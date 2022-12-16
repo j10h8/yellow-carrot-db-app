@@ -14,14 +14,6 @@ namespace YellowCarrotDbApp
             InitializeComponent();
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            SignInWindow signInWindow = new();
-            signInWindow.Show();
-
-            this.Close();
-        }
-
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             if (txtUsername.Text.Trim().Length < 1 || txtUsername.Text.Trim().Length < 2 || pbPassword.Password.Length < 1 || pbPassword.Password.Length < 8 || pbPassword.Password.Contains(' ') || pbConfirmPassword.Password.Contains(' ') || pbPassword.Password != pbConfirmPassword.Password)
@@ -56,6 +48,14 @@ namespace YellowCarrotDbApp
                     }
                 }
             }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            SignInWindow signInWindow = new();
+            signInWindow.Show();
+
+            this.Close();
         }
     }
 }

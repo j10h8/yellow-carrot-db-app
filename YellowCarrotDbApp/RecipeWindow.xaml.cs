@@ -43,25 +43,6 @@ namespace YellowCarrotDbApp
             }
         }
 
-        private void btnSignOut_Click(object sender, RoutedEventArgs e)
-        {
-            SignInWindow signInWindow = new();
-            signInWindow.Show();
-
-            this.Close();
-        }
-
-        private void btnDetailsEnabled_Click(object sender, RoutedEventArgs e)
-        {
-            ListViewItem recipeItem = (ListViewItem)lvRecipies.SelectedItem;
-            Recipe recipe = (Recipe)recipeItem.Tag;
-
-            DetailsWindow detailsWindow = new(_signedInUserName, recipe.Name);
-            detailsWindow.Show();
-
-            this.Close();
-        }
-
         private void btnAddRecipie_Click(object sender, RoutedEventArgs e)
         {
             AddRecipeWindow addRecipeWindow = new(_signedInUserName);
@@ -88,6 +69,17 @@ namespace YellowCarrotDbApp
             }
         }
 
+        private void btnDetailsEnabled_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewItem recipeItem = (ListViewItem)lvRecipies.SelectedItem;
+            Recipe recipe = (Recipe)recipeItem.Tag;
+
+            DetailsWindow detailsWindow = new(_signedInUserName, recipe.Name);
+            detailsWindow.Show();
+
+            this.Close();
+        }
+
         private void lvRecipies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lvRecipies.SelectedItems.Count > 0)
@@ -104,6 +96,14 @@ namespace YellowCarrotDbApp
                 btnDeleteDisabled.Visibility = Visibility.Visible;
                 btnDeleteEnabled.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            SignInWindow signInWindow = new();
+            signInWindow.Show();
+
+            this.Close();
         }
     }
 }

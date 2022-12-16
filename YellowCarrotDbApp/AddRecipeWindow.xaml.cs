@@ -24,39 +24,25 @@ namespace YellowCarrotDbApp
             InitializeComponent();
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void UpdateListViews()
         {
-            RecipeWindow recipeWindow = new(_signedInUserName);
-            recipeWindow.Show();
+            lvIngredients.Items.Clear();
+            lvTags.Items.Clear();
 
-            this.Close();
-        }
+            foreach (Ingredient ingredient in _ingredients.OrderBy(i => i.Name).ToList())
+            {
+                ListViewItem ingredientItem = new();
+                ingredientItem.Content = $"{ingredient.Name} ({ingredient.Quantity})";
+                ingredientItem.Tag = ingredient;
+                lvIngredients.Items.Add(ingredientItem);
+            }
 
-        private void lvIngredients_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if (lvIngredients.SelectedItems.Count > 0)
+            foreach (Tag tag in _tags.OrderBy(t => t.Description).ToList())
             {
-                btnDeleteIngredientDisabled.Visibility = Visibility.Hidden;
-                btnDeleteIngredientEnabled.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                btnDeleteIngredientDisabled.Visibility = Visibility.Visible;
-                btnDeleteIngredientEnabled.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private void lvTags_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if (lvTags.SelectedItems.Count > 0)
-            {
-                btnDeleteTagDisabled.Visibility = Visibility.Hidden;
-                btnDeleteTagEnabled.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                btnDeleteTagDisabled.Visibility = Visibility.Visible;
-                btnDeleteTagEnabled.Visibility = Visibility.Hidden;
+                ListViewItem tagItem = new();
+                tagItem.Content = tag.Description;
+                tagItem.Tag = tag;
+                lvTags.Items.Add(tagItem);
             }
         }
 
@@ -76,26 +62,13 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
-        private void UpdateListViews()
+        private void btnDeleteIngredientEnabled_Click(object sender, RoutedEventArgs e)
         {
-            lvIngredients.Items.Clear();
-            lvTags.Items.Clear();
+            ListViewItem ingredientItem = (ListViewItem)lvIngredients.SelectedItem;
+            Ingredient ingredient = (Ingredient)ingredientItem.Tag;
+            _ingredients.Remove(ingredient);
 
-            foreach (Ingredient ingredient in _ingredients.OrderBy(i => i.Name).ToList())
-            {
-                ListViewItem ingredientItem = new();
-                ingredientItem.Content = $"{ingredient.Quantity} {ingredient.Name}";
-                ingredientItem.Tag = ingredient;
-                lvIngredients.Items.Add(ingredientItem);
-            }
-
-            foreach (Tag tag in _tags.OrderBy(t => t.Description).ToList())
-            {
-                ListViewItem tagItem = new();
-                tagItem.Content = tag.Description;
-                tagItem.Tag = tag;
-                lvTags.Items.Add(tagItem);
-            }
+            UpdateListViews();
         }
 
         private void btnAddTagEnabled_Click(object sender, RoutedEventArgs e)
@@ -108,6 +81,15 @@ namespace YellowCarrotDbApp
             _tags.Add(tag);
 
             txtTag.Clear();
+
+            UpdateListViews();
+        }
+
+        private void btnDeleteTagEnabled_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewItem tagItem = (ListViewItem)lvTags.SelectedItem;
+            Tag tag = (Tag)tagItem.Tag;
+            _tags.Remove(tag);
 
             UpdateListViews();
         }
@@ -149,24 +131,6 @@ namespace YellowCarrotDbApp
             }
         }
 
-        private void btnDeleteIngredientEnabled_Click(object sender, RoutedEventArgs e)
-        {
-            ListViewItem ingredientItem = (ListViewItem)lvIngredients.SelectedItem;
-            Ingredient ingredient = (Ingredient)ingredientItem.Tag;
-            _ingredients.Remove(ingredient);
-
-            UpdateListViews();
-        }
-
-        private void btnDeleteTagEnabled_Click(object sender, RoutedEventArgs e)
-        {
-            ListViewItem tagItem = (ListViewItem)lvTags.SelectedItem;
-            Tag tag = (Tag)tagItem.Tag;
-            _tags.Remove(tag);
-
-            UpdateListViews();
-        }
-
         private void txtIngredient_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtIngredient.Text.Trim().Length > 0 && txtQuantity.Text.Trim().Length > 0)
@@ -193,6 +157,42 @@ namespace YellowCarrotDbApp
                 btnAddTagDisabled.Visibility = Visibility.Visible;
                 btnAddTagEnabled.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void lvIngredients_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (lvIngredients.SelectedItems.Count > 0)
+            {
+                btnDeleteIngredientDisabled.Visibility = Visibility.Hidden;
+                btnDeleteIngredientEnabled.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnDeleteIngredientDisabled.Visibility = Visibility.Visible;
+                btnDeleteIngredientEnabled.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void lvTags_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (lvTags.SelectedItems.Count > 0)
+            {
+                btnDeleteTagDisabled.Visibility = Visibility.Hidden;
+                btnDeleteTagEnabled.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnDeleteTagDisabled.Visibility = Visibility.Visible;
+                btnDeleteTagEnabled.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            RecipeWindow recipeWindow = new(_signedInUserName);
+            recipeWindow.Show();
+
+            this.Close();
         }
     }
 }
