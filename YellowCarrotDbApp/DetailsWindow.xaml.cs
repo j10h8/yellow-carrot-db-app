@@ -149,7 +149,7 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
-        // Updates recipe if data has been provided correctly and recipe name is available 
+        // Updates recipe if data has been provided correctly and if recipe name is available 
         private void btnSaveRecipe_Click(object sender, RoutedEventArgs e)
         {
             if (txtRecipeName.Text.Trim().Length > 0 && _ingredients.Count > 1 && _tags.Count > 0)

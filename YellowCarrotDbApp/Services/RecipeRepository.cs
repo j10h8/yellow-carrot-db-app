@@ -28,7 +28,7 @@ namespace YellowCarrotDbApp.Services
             return _appContext.Recipes.Include(u => u.User).ToList();
         }
 
-        // UpdateRecipe updates recipe in YellowCarrotDb
+        // Updates recipe in YellowCarrotDb
         public void UpdateRecipe(string oldRecipeName, string newRecipeName, string username, List<Ingredient> ingredients, List<Tag> tags)
         {
             // GetRecipe gets and returns a recipe from YellowCarrotDb 
@@ -73,6 +73,7 @@ namespace YellowCarrotDbApp.Services
 
             _appContext.Recipes.Add(recipe);
         }
+
         // Deletes recipes tags in YellowCarrotDb
         public void DeleteTags(string recipeName)
         {

@@ -15,7 +15,7 @@ namespace YellowCarrotDbApp
             InitializeComponent();
         }
 
-        // Saves user in YellowCarrotDb and YellowCarrotUserDb if data has been provided correctly and provided username is not already registered 
+        // Saves user in YellowCarrotDb and YellowCarrotUserDb if data has been provided correctly and if provided username is available 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             if (txtUsername.Text.Trim().Length < 1 || txtUsername.Text.Trim().Length < 2 || pbPassword.Password.Length < 1 || pbPassword.Password.Length < 8 || pbPassword.Password.Contains(' ') || pbConfirmPassword.Password.Contains(' ') || pbPassword.Password != pbConfirmPassword.Password)

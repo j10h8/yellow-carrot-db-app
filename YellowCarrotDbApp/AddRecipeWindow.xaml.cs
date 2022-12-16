@@ -100,7 +100,7 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
-        // Adds recipe to YellowCarrotDb if data has been provided correctly and recipe name is available
+        // Adds recipe to YellowCarrotDb if data has been provided correctly and if recipe name is available
         private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
         {
             if (txtRecipeName.Text.Trim().Length > 0 && _ingredients.Count > 1 && _tags.Count > 0)

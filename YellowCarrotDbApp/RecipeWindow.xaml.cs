@@ -87,7 +87,7 @@ namespace YellowCarrotDbApp
             this.Close();
         }
 
-        // Updates button visibility 
+        // Updates button visibility depending on listview selection 
         private void lvRecipes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lvRecipes.SelectedItems.Count > 0)
