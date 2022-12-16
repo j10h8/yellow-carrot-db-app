@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using YellowCarrotDbApp.Data;
@@ -80,7 +81,7 @@ namespace YellowCarrotDbApp
             lvIngredients.Items.Clear();
             lvTags.Items.Clear();
 
-            foreach (Ingredient ingredient in _ingredients)
+            foreach (Ingredient ingredient in _ingredients.OrderBy(i => i.Name).ToList())
             {
                 ListViewItem ingredientItem = new();
                 ingredientItem.Content = $"{ingredient.Quantity} {ingredient.Name}";
@@ -88,7 +89,7 @@ namespace YellowCarrotDbApp
                 lvIngredients.Items.Add(ingredientItem);
             }
 
-            foreach (Tag tag in _tags)
+            foreach (Tag tag in _tags.OrderBy(t => t.Description).ToList())
             {
                 ListViewItem tagItem = new();
                 tagItem.Content = tag.Description;

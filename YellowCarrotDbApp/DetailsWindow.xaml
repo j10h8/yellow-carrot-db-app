@@ -340,8 +340,8 @@
             Background="#333D79FF"
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
-            IsHitTestVisible="False"
             Margin="10 0 10 10"
+            SelectionMode="Single"
             SelectionChanged="lvIngredients_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="Border">
@@ -409,7 +409,6 @@
             BorderThickness="2"
             SelectionMode="Single"
             Margin="10 0 10 10"
-            IsHitTestVisible="False"
             SelectionChanged="lvTags_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="Border">

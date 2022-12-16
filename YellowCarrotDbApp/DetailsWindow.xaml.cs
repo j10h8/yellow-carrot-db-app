@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using YellowCarrotDbApp.Data;
@@ -53,7 +54,7 @@ namespace YellowCarrotDbApp
 
         private void lvIngredients_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (lvIngredients.SelectedItems.Count > 0)
+            if (lvIngredients.SelectedItems.Count > 0 && txtRecipeName.IsReadOnly == false)
             {
                 btnDeleteIngredientDisabled.Visibility = Visibility.Hidden;
                 btnDeleteIngredientEnabled.Visibility = Visibility.Visible;
@@ -67,7 +68,7 @@ namespace YellowCarrotDbApp
 
         private void lvTags_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (lvTags.SelectedItems.Count > 0)
+            if (lvTags.SelectedItems.Count > 0 && txtRecipeName.IsReadOnly == false)
             {
                 btnDeleteTagDisabled.Visibility = Visibility.Hidden;
                 btnDeleteTagEnabled.Visibility = Visibility.Visible;
@@ -100,15 +101,15 @@ namespace YellowCarrotDbApp
             lvIngredients.Items.Clear();
             lvTags.Items.Clear();
 
-            foreach (Ingredient ingredient in _ingredients)
+            foreach (Ingredient ingredient in _ingredients.OrderBy(i => i.Name).ToList())
             {
                 ListViewItem ingredientItem = new();
-                ingredientItem.Content = $"{ingredient.Quantity} {ingredient.Name}";
+                ingredientItem.Content = $"{ingredient.Name}, {ingredient.Quantity}";
                 ingredientItem.Tag = ingredient;
                 lvIngredients.Items.Add(ingredientItem);
             }
 
-            foreach (Tag tag in _tags)
+            foreach (Tag tag in _tags.OrderBy(t => t.Description).ToList())
             {
                 ListViewItem tagItem = new();
                 tagItem.Content = tag.Description;
@@ -159,20 +160,20 @@ namespace YellowCarrotDbApp
 
                         uow.RecipeRepository.DeleteTags(_recipe.Name);
 
-                        List<Ingredient> newIngredientList = new();
+                        //List<Ingredient> newIngredientList = new();
 
-                        foreach (Ingredient ingredient in _ingredients)
-                        {
-                            Ingredient newIngredient = new()
-                            {
-                                Name = ingredient.Name,
-                                Quantity = ingredient.Quantity
-                            };
+                        //foreach (Ingredient ingredient in _ingredients)
+                        //{
+                        //    Ingredient newIngredient = new()
+                        //    {
+                        //        Name = ingredient.Name,
+                        //        Quantity = ingredient.Quantity
+                        //    };
 
-                            newIngredientList.Add(newIngredient);
-                        }
+                        //    newIngredientList.Add(newIngredient);
+                        //}
 
-                        uow.RecipeRepository.UpdateRecipe(_oldRecipeName, txtRecipeName.Text.Trim(), _signedInUserName, newIngredientList, newTagList);
+                        uow.RecipeRepository.UpdateRecipe(_oldRecipeName, txtRecipeName.Text.Trim(), _signedInUserName, _ingredients, newTagList);
 
                         uow.SaveChanges();
 
@@ -180,6 +181,13 @@ namespace YellowCarrotDbApp
                         txtQuantity.Clear();
                         txtTag.Clear();
                         _oldRecipeName = txtRecipeName.Text.Trim();
+                        txtRecipeName.IsReadOnly = true;
+                        txtIngredient.IsReadOnly = true;
+                        txtQuantity.IsReadOnly = true;
+                        txtTag.IsReadOnly = true;
+                        lvIngredients.UnselectAll();
+                        lvTags.UnselectAll();
+
 
                         SetRecipe();
 
@@ -252,8 +260,8 @@ namespace YellowCarrotDbApp
                 txtIngredient.IsReadOnly = false;
                 txtQuantity.IsReadOnly = false;
                 txtTag.IsReadOnly = false;
-                lvIngredients.IsHitTestVisible = true;
-                lvTags.IsHitTestVisible = true;
+                lvIngredients.UnselectAll();
+                lvTags.UnselectAll();
 
                 btnUnlock.Visibility = Visibility.Hidden;
                 btnSaveRecipe.Visibility = Visibility.Visible;

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using YellowCarrotDbApp.Data;
 using YellowCarrotDbApp.Models;
@@ -30,7 +31,7 @@ namespace YellowCarrotDbApp
             {
                 UnitOfWork uow = new(appContext);
 
-                foreach (Recipe recipe in uow.RecipeRepository.GetRecipies())
+                foreach (Recipe recipe in uow.RecipeRepository.GetRecipies().OrderBy(n => n.Name).ToList())
                 {
                     ListViewItem item = new();
                     item.Content = recipe.Name;

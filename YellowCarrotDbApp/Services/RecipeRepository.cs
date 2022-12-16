@@ -21,7 +21,7 @@ namespace YellowCarrotDbApp.Services
         }
         public List<Recipe> GetRecipies()
         {
-            return _appContext.Recipes.Include(u => u.User).OrderBy(n => n.Name).ToList();
+            return _appContext.Recipes.Include(u => u.User).ToList();
         }
 
         public void UpdateRecipe(string oldRecipeName, string newRecipeName, string username, List<Ingredient> ingredients, List<Tag> tags)
