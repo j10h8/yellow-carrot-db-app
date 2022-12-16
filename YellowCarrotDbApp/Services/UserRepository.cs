@@ -13,6 +13,7 @@ namespace YellowCarrotDbApp.Services
             _userContext = userContext;
         }
 
+        // Checks if provided username and password exist in YellowCarrotUserDb 
         public bool IsRegistered(string username, string password)
         {
             if (_userContext.Users.Any(u => u.Username == username && u.Password == password))
@@ -23,6 +24,7 @@ namespace YellowCarrotDbApp.Services
             return false;
         }
 
+        // Creates and saves a User in YellowCarrotUserDb if provided username does not exist in YellowCarrotUserDb
         public bool RegisterNewUser(string username, string password)
         {
             if (_userContext.Users.Any(u => u.Username == username))
@@ -43,6 +45,7 @@ namespace YellowCarrotDbApp.Services
             }
         }
 
+        // Saves all changes made to YellowCarrotUserDb
         public void SaveChanges()
         {
             _userContext.SaveChanges();

@@ -23,13 +23,13 @@ namespace YellowCarrotDbApp.Migrations
 
             modelBuilder.Entity("RecipeTag", b =>
                 {
-                    b.Property<int>("RecipiesRecipeId")
+                    b.Property<int>("RecipesRecipeId")
                         .HasColumnType("int");
 
                     b.Property<int>("TagsTagId")
                         .HasColumnType("int");
 
-                    b.HasKey("RecipiesRecipeId", "TagsTagId");
+                    b.HasKey("RecipesRecipeId", "TagsTagId");
 
                     b.HasIndex("TagsTagId");
 
@@ -297,7 +297,7 @@ namespace YellowCarrotDbApp.Migrations
                 {
                     b.HasOne("YellowCarrotDbApp.Models.Recipe", null)
                         .WithMany()
-                        .HasForeignKey("RecipiesRecipeId")
+                        .HasForeignKey("RecipesRecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -322,7 +322,7 @@ namespace YellowCarrotDbApp.Migrations
             modelBuilder.Entity("YellowCarrotDbApp.Models.Recipe", b =>
                 {
                     b.HasOne("YellowCarrotDbApp.Models.AppUser", "User")
-                        .WithMany("Recipies")
+                        .WithMany("Recipes")
                         .HasForeignKey("Username");
 
                     b.Navigation("User");
@@ -330,7 +330,7 @@ namespace YellowCarrotDbApp.Migrations
 
             modelBuilder.Entity("YellowCarrotDbApp.Models.AppUser", b =>
                 {
-                    b.Navigation("Recipies");
+                    b.Navigation("Recipes");
                 });
 
             modelBuilder.Entity("YellowCarrotDbApp.Models.Recipe", b =>

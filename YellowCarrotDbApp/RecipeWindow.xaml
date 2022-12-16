@@ -139,7 +139,7 @@
         <Label
             Grid.Column="3"
             Grid.Row="1"
-            Content="Recipies"
+            Content="Recipes"
             FontFamily="Arial"
             Foreground="#FAEBEFFF"
             FontSize="50"
@@ -147,7 +147,7 @@
             VerticalContentAlignment="Center"
             Grid.ColumnSpan="2"/>
         <ListView
-            Name="lvRecipies"
+            Name="lvRecipes"
             Grid.Column="3"
             Grid.Row="2"
             Grid.ColumnSpan="2"
@@ -157,7 +157,7 @@
             BorderBrush="#FAEBEFFF"
             BorderThickness="2"
             SelectionMode="Single"
-            SelectionChanged="lvRecipies_SelectionChanged">
+            SelectionChanged="lvRecipes_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

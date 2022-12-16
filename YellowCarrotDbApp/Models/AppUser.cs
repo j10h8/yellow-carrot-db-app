@@ -7,6 +7,6 @@ namespace YellowCarrotDbApp.Models
     {
         [Key]
         public string Username { get; set; } = null!;
-        public List<Recipe> Recipies { get; set; } = new();
+        public List<Recipe> Recipes { get; set; } = new();
     }
 }

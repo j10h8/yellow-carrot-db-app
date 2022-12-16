@@ -5,13 +5,14 @@ namespace YellowCarrotDbApp.Services
 {
     public class AppUserRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _appContext;
 
         public AppUserRepository(AppDbContext context)
         {
-            _context = context;
+            _appContext = context;
         }
 
+        // Creates and saves an AppUser to YellowCarrotDb
         public void AddUser(string username)
         {
             AppUser appUser = new()
@@ -19,7 +20,7 @@ namespace YellowCarrotDbApp.Services
                 Username = username
             };
 
-            _context.AppUsers.Add(appUser);
+            _appContext.AppUsers.Add(appUser);
         }
     }
 }

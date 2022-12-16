@@ -7,7 +7,7 @@
 namespace YellowCarrotDbApp.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial1 : Migration
+    public partial class InitialAppDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,15 +80,15 @@ namespace YellowCarrotDbApp.Migrations
                 name: "RecipeTag",
                 columns: table => new
                 {
-                    RecipiesRecipeId = table.Column<int>(type: "int", nullable: false),
+                    RecipesRecipeId = table.Column<int>(type: "int", nullable: false),
                     TagsTagId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeTag", x => new { x.RecipiesRecipeId, x.TagsTagId });
+                    table.PrimaryKey("PK_RecipeTag", x => new { x.RecipesRecipeId, x.TagsTagId });
                     table.ForeignKey(
-                        name: "FK_RecipeTag_Recipes_RecipiesRecipeId",
-                        column: x => x.RecipiesRecipeId,
+                        name: "FK_RecipeTag_Recipes_RecipesRecipeId",
+                        column: x => x.RecipesRecipeId,
                         principalTable: "Recipes",
                         principalColumn: "RecipeId",
                         onDelete: ReferentialAction.Cascade);

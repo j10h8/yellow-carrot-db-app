@@ -14,6 +14,7 @@ namespace YellowCarrotDbApp
     {
         private string _signedInUserName;
 
+        // Class constructor. Calls InitializeComponent and UpdateUi methods. Takes string argument and sets field variable.
         public RecipeWindow(string signedInUserName)
         {
             _signedInUserName = signedInUserName;
@@ -23,26 +24,30 @@ namespace YellowCarrotDbApp
             UpdateUi();
         }
 
+        // Updates RecipeWindow UI 
         private void UpdateUi()
         {
-            lvRecipies.Items.Clear();
+            lvRecipes.Items.Clear();
 
             using (AppDbContext appContext = new())
             {
                 UnitOfWork uow = new(appContext);
 
-                foreach (Recipe recipe in uow.RecipeRepository.GetRecipies().OrderBy(n => n.Name).ToList())
+                // GetRecipes gets and returns a list of all Recipes in YellowCarrotDb
+                foreach (Recipe recipe in uow.RecipeRepository.GetRecipes().OrderBy(n => n.Name).ToList())
                 {
                     ListViewItem item = new();
                     item.Content = recipe.Name;
                     item.Tag = recipe;
-                    lvRecipies.Items.Add(item);
+                    lvRecipes.Items.Add(item);
                 }
 
+                // SaveChanges saves all changes made to YellowCarrotDb
                 uow.SaveChanges();
             }
         }
 
+        // Creates and opens a RecipeWindow and closes this window 
         private void btnAddRecipie_Click(object sender, RoutedEventArgs e)
         {
             AddRecipeWindow addRecipeWindow = new(_signedInUserName);
@@ -51,9 +56,10 @@ namespace YellowCarrotDbApp
             this.Close();
         }
 
+        // Creates and opens a ConfirmDeleteWindow if the signed in users username = the recipe users username. Closes this window. 
         private void btnDeleteEnabled_Click(object sender, RoutedEventArgs e)
         {
-            ListViewItem item = (ListViewItem)lvRecipies.SelectedItem;
+            ListViewItem item = (ListViewItem)lvRecipes.SelectedItem;
             Recipe recipe = (Recipe)item.Tag;
 
             if (recipe.User.Username == _signedInUserName)
@@ -69,9 +75,10 @@ namespace YellowCarrotDbApp
             }
         }
 
+        // Creates and opens a DetailsWindow and closes this window 
         private void btnDetailsEnabled_Click(object sender, RoutedEventArgs e)
         {
-            ListViewItem recipeItem = (ListViewItem)lvRecipies.SelectedItem;
+            ListViewItem recipeItem = (ListViewItem)lvRecipes.SelectedItem;
             Recipe recipe = (Recipe)recipeItem.Tag;
 
             DetailsWindow detailsWindow = new(_signedInUserName, recipe.Name);
@@ -80,9 +87,10 @@ namespace YellowCarrotDbApp
             this.Close();
         }
 
-        private void lvRecipies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        // Updates button visibility 
+        private void lvRecipes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lvRecipies.SelectedItems.Count > 0)
+            if (lvRecipes.SelectedItems.Count > 0)
             {
                 btnDetailsDisabled.Visibility = Visibility.Hidden;
                 btnDetailsEnabled.Visibility = Visibility.Visible;
@@ -98,6 +106,7 @@ namespace YellowCarrotDbApp
             }
         }
 
+        // Creates and opens a SignInWindow and closes this window 
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
             SignInWindow signInWindow = new();

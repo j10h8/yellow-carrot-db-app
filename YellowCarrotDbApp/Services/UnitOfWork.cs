@@ -4,7 +4,7 @@ namespace YellowCarrotDbApp.Services
 {
     public class UnitOfWork
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _appContext;
 
         private IngredientRepository _ingredientRepository;
         private RecipeRepository _recipeRepository;
@@ -13,7 +13,7 @@ namespace YellowCarrotDbApp.Services
 
         public UnitOfWork(AppDbContext context)
         {
-            _context = context;
+            _appContext = context;
         }
 
         public IngredientRepository IngredientRepository
@@ -22,7 +22,7 @@ namespace YellowCarrotDbApp.Services
             {
                 if (_ingredientRepository == null)
                 {
-                    _ingredientRepository = new(_context);
+                    _ingredientRepository = new(_appContext);
                 }
 
                 return _ingredientRepository;
@@ -35,7 +35,7 @@ namespace YellowCarrotDbApp.Services
             {
                 if (_recipeRepository == null)
                 {
-                    _recipeRepository = new(_context);
+                    _recipeRepository = new(_appContext);
                 }
 
                 return _recipeRepository;
@@ -48,7 +48,7 @@ namespace YellowCarrotDbApp.Services
             {
                 if (_tagRepository == null)
                 {
-                    _tagRepository = new(_context);
+                    _tagRepository = new(_appContext);
                 }
 
                 return _tagRepository;
@@ -61,16 +61,17 @@ namespace YellowCarrotDbApp.Services
             {
                 if (_appUserRepository == null)
                 {
-                    _appUserRepository = new(_context);
+                    _appUserRepository = new(_appContext);
                 }
 
                 return _appUserRepository;
             }
         }
 
+        // Saves all changes made to YellowCarrotDb
         public void SaveChanges()
         {
-            _context.SaveChanges();
+            _appContext.SaveChanges();
         }
     }
 }

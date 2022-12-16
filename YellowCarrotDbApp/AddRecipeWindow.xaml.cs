@@ -17,6 +17,7 @@ namespace YellowCarrotDbApp
         private List<Ingredient> _ingredients = new();
         private List<Tag> _tags = new();
 
+        // Class constructor. Calls InitializeComponent method. Takes string argument and sets field variable.
         public AddRecipeWindow(string signedInUserName)
         {
             _signedInUserName = signedInUserName;
@@ -24,6 +25,7 @@ namespace YellowCarrotDbApp
             InitializeComponent();
         }
 
+        // Updates listviews 
         private void UpdateListViews()
         {
             lvIngredients.Items.Clear();
@@ -46,6 +48,7 @@ namespace YellowCarrotDbApp
             }
         }
 
+        // Creates and adds Ingredient to ingredients list 
         private void btnAddIngredientEnabled_Click(object sender, RoutedEventArgs e)
         {
             Ingredient ingredient = new()
@@ -62,6 +65,7 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
+        // Deletes Ingredient from ingredients list 
         private void btnDeleteIngredientEnabled_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem ingredientItem = (ListViewItem)lvIngredients.SelectedItem;
@@ -71,6 +75,7 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
+        // Creates and adds Tag to tags list 
         private void btnAddTagEnabled_Click(object sender, RoutedEventArgs e)
         {
             Tag tag = new()
@@ -85,6 +90,7 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
+        // Deletes Tag from tags list 
         private void btnDeleteTagEnabled_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem tagItem = (ListViewItem)lvTags.SelectedItem;
@@ -94,6 +100,7 @@ namespace YellowCarrotDbApp
             UpdateListViews();
         }
 
+        // Adds recipe to YellowCarrotDb if data has been provided correctly and recipe name is available
         private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
         {
             if (txtRecipeName.Text.Trim().Length > 0 && _ingredients.Count > 1 && _tags.Count > 0)
@@ -102,14 +109,17 @@ namespace YellowCarrotDbApp
                 {
                     UnitOfWork uow = new(appContext);
 
+                    // IsUsed returns true if recipe name exists in YellowCarrotDb
                     if (uow.RecipeRepository.IsUsed(txtRecipeName.Text.Trim()))
                     {
                         MessageBox.Show("Recipe name is already used. Please choose another one!", "Error!");
                     }
                     else
                     {
+                        // AddRecipe adds recipe to YellowCarrotDb 
                         uow.RecipeRepository.AddRecipe(txtRecipeName.Text.Trim(), _signedInUserName, _ingredients, _tags);
 
+                        // SaveChanges saves all changes made to YellowCarrotDb
                         uow.SaveChanges();
 
                         txtRecipeName.Clear();
@@ -131,6 +141,7 @@ namespace YellowCarrotDbApp
             }
         }
 
+        // Changes button visibility depending on text input 
         private void txtIngredient_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtIngredient.Text.Trim().Length > 0 && txtQuantity.Text.Trim().Length > 0)
@@ -145,6 +156,7 @@ namespace YellowCarrotDbApp
             }
         }
 
+        // Changes button visibility depending on text input 
         private void txtTag_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtTag.Text.Trim().Length > 0)
@@ -159,6 +171,7 @@ namespace YellowCarrotDbApp
             }
         }
 
+        // Changes button visibility depending on listview selection
         private void lvIngredients_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (lvIngredients.SelectedItems.Count > 0)
@@ -173,6 +186,7 @@ namespace YellowCarrotDbApp
             }
         }
 
+        // Changes button visibility depending on listview selection
         private void lvTags_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (lvTags.SelectedItems.Count > 0)
@@ -187,6 +201,7 @@ namespace YellowCarrotDbApp
             }
         }
 
+        // Creates and opens a RecipeWindow and closes this window 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             RecipeWindow recipeWindow = new(_signedInUserName);

@@ -6,6 +6,6 @@ namespace YellowCarrotDbApp.Models
     {
         public int TagId { get; set; }
         public string Description { get; set; } = null!;
-        public List<Recipe> Recipies { get; set; } = new();
+        public List<Recipe> Recipes { get; set; } = new();
     }
 }
