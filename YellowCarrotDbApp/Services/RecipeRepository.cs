@@ -10,6 +10,7 @@ namespace YellowCarrotDbApp.Services
     {
         private readonly AppDbContext _appContext;
 
+        // Class constructor. Takes AppDbContext argument and sets field variable.
         public RecipeRepository(AppDbContext context)
         {
             _appContext = context;

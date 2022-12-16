@@ -8,6 +8,7 @@ namespace YellowCarrotDbApp.Services
     {
         private readonly UserDbContext _userContext;
 
+        // Class constructor. Takes UserDbContext argument and sets field variable.
         public UserRepository(UserDbContext userContext)
         {
             _userContext = userContext;

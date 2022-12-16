@@ -11,6 +11,7 @@ namespace YellowCarrotDbApp.Services
         private TagRepository _tagRepository;
         private AppUserRepository _appUserRepository;
 
+        // Class constructor. Takes AppDbContext argument and sets field variable.
         public UnitOfWork(AppDbContext context)
         {
             _appContext = context;
